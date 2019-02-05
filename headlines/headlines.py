@@ -1,6 +1,6 @@
 #piro-headlines {get real time news along with analysis }
 import feedparser
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -12,19 +12,16 @@ RSS_FEEDS = {'ent':'https://economictimes.indiatimes.com/small-biz/entrepreneurs
              'iol': 'http://www.iol.co.za/cmlink/1.640',
              'bs': 'https://www.business-standard.com/rss/news-ians-education-15009.rss'}
 
-@app.route("/")
-@app.route("/bbc")
-def bbc():
-    return get_news('bbc')
 
 @app.route("/")
-@app.route("/<publication>")
-
-
-def get_news(publication="bbc"):
-  feed = feedparser.parse(RSS_FEEDS[publication])
-  #first_article = feed['entries'][0]
-  return render_template("home.html",articles=feed['entries'])
+def get_news():
+        query = request.args.get("publication")
+        if not query or query.lower() not in RSS_FEEDS:
+                publication = "cnn"
+        else:
+                publication = query.lower()
+        feed = feedparser.parse(RSS_FEEDS[publication])
+        return render_template("home.html",articles=feed['entries'])
 
 
 if __name__ == "__main__":

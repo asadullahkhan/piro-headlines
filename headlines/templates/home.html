@@ -7,6 +7,10 @@
 <body>
     <h5 style="text-align:center;">Welcome to Piro AI Solutions </h5>
     <h3>Headlines</h3>
+    <form>
+        <input type="text" name="publication" placeholder="search" />
+        <input type="submit" value="Submit" />
+    </form>
     {% for article in articles %}
     <b>Title: <a href="{{article.link}}"> {{article.title}}</a></b> <br />
 
