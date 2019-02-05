@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Piro-AI Solutions</title>
 </head>
 <body>
-$END$
+    <h5 style="text-align:center;">Welcome to Piro AI Solutions </h5>
+    <h3>Headlines</h3>
+    {% for article in articles %}
+    <b>Title: <a href="{{article.link}}"> {{article.title}}</a></b> <br />
+
+        <p>Summary: {{article.summary}}</p><br />
+
+        <i>Date: {{article.published}}</i>
+        <b><hr/></b><hr/>
+    {% endfor %}
 </body>
 </html>
